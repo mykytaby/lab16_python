@@ -1,8 +1,7 @@
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from nltk.tokenize import regexp_tokenize
+from nltk.stem import WordNetLemmatizer, PorterStemmer
 import string
 
 # Download necessary NLTK resources
@@ -26,6 +25,10 @@ def process_text(text):
     lemmatizer = WordNetLemmatizer()
     words = [lemmatizer.lemmatize(word) for word in words]
 
+    # Stemming
+    stemmer = PorterStemmer()
+    words = [stemmer.stem(word) for word in words]
+
     return words
 
 # Reading the input text
@@ -40,4 +43,3 @@ with open('processed_text.txt', 'w') as file:
     file.write(" ".join(processed_words))
 
 print("Text processing is complete. Processed text is saved in 'processed_text.txt'.")
-
